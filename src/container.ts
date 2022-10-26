@@ -1,8 +1,8 @@
 import { Container } from 'inversify';
 import { ItemController } from './modules/item/infra/http/item.controller';
 import { ItemService } from './modules/item/app/item.service';
-import { MemoryData } from './modules/item/infra/database/memory-db';
-import { ItemMemoryRepository } from './modules/item/infra/database/item.repository';
+import { MemoryData } from './modules/item/infra/database/memory.ts/memory-db';
+import { ItemMemoryRepository } from './modules/item/infra/database/memory.ts/item.repository';
 import { ItemRepository } from './modules/item/domain/repository/item.respository';
 import { TYPES } from './modules/item/types';
 import { IServer, Server } from './api/http/server';

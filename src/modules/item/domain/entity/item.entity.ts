@@ -30,10 +30,10 @@ export class Item extends Entity<UnmarshalledItem> {
   }
 
   get displayName(): string {
-    return this.props.displayName;
+    return this.displayName;
   }
 
   get price(): number {
-    return this.props.price;
+    return this.price;
   }
 }
