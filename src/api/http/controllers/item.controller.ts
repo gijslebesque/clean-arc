@@ -1,9 +1,12 @@
 import { controller, httpGet, httpPost } from 'inversify-express-utils';
 import { inject } from 'inversify';
 import { Request } from 'express';
-import { ItemService } from '../../app/item.service';
-import { TYPES } from '../../types';
-import { Item, UnmarshalledItem } from '../../domain/entity/item.entity';
+import { ItemService } from '../../../modules/item/application/item.service';
+import { TYPES } from '../../../modules/item/types';
+import {
+  Item,
+  UnmarshalledItem
+} from '../../../modules/item/domain/entity/item.entity';
 
 @controller('/item')
 export class ItemController {

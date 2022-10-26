@@ -1,6 +1,6 @@
 import { Container } from 'inversify';
-import { ItemController } from './modules/item/infra/http/item.controller';
-import { ItemService } from './modules/item/app/item.service';
+import { ItemController } from './api/http/controllers/item.controller';
+import { ItemService } from './modules/item/application/item.service';
 import { MemoryData } from './modules/item/infra/database/memory.ts/memory-db';
 import { ItemMemoryRepository } from './modules/item/infra/database/memory.ts/item.repository';
 import { ItemRepository } from './modules/item/domain/repository/item.respository';
