@@ -7,14 +7,12 @@
     ],
     "extends": [
         "eslint:recommended",
-        "airbnb",
         "plugin:@typescript-eslint/eslint-recommended",
         "plugin:@typescript-eslint/recommended",
         "plugin:prettier/recommended"
     ],
     "rules": {
         "no-console": 1,
-        "prettier/prettier": 2, // Means error
-        "no-underscore-dangle": "off" 
+        "prettier/prettier": 2 // Means error
     }
 }
