@@ -1,14 +1,10 @@
 import { injectable, inject } from 'inversify';
 import { Item, UnmarshalledItem } from '../../../domain/entity/item.entity';
 import { ItemRepository } from '../../../domain/repository/item.respository';
-import { TYPES } from '../../../types';
 import { ItemModel } from '../../model/item.model';
-import { MemoryData } from './memory-db';
 
 @injectable()
 export class ItemMongoRepository implements ItemRepository {
-  //   constructor(@inject(TYPES.Database) private _database: M) {}
-
   async findAll(): Promise<Item[]> {
     const items = await ItemModel.find();
 
