@@ -1,7 +1,7 @@
-import { injectable, inject } from 'inversify';
-import { Item, UnmarshalledItem } from '../../../domain/entity/item.entity';
-import { ItemRepository } from '../../../domain/repository/item.respository';
-import { ItemModel } from '../../model/item.model';
+import { injectable } from "inversify";
+import { Item, UnmarshalledItem } from "../../../domain/entity/item.entity";
+import { ItemRepository } from "../../../domain/repository/item.respository";
+import { ItemModel } from "../../model/item.model";
 
 @injectable()
 export class ItemMongoRepository implements ItemRepository {
@@ -23,7 +23,7 @@ export class ItemMongoRepository implements ItemRepository {
     const { displayName, price } = item.unmarshal();
     const inserted = await ItemModel.create({
       displayName,
-      price
+      price,
     });
     return Item.create(inserted);
   }

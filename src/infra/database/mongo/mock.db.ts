@@ -1,5 +1,5 @@
-import MongoMemoryServer from 'mongodb-memory-server-core/lib/MongoMemoryServer';
-import { DbConnection } from './mongo.db';
+import MongoMemoryServer from "mongodb-memory-server-core/lib/MongoMemoryServer";
+import { DbConnection } from "./mongo.db";
 
 export class DbMock {
   public static mongod: MongoMemoryServer;
@@ -9,8 +9,8 @@ export class DbMock {
       instance: {
         dbName: process.env.DB_DB_NAME,
         ip: process.env.DB_IP,
-        port: parseInt(process.env.DB_PORT ?? '3000', 10)
-      }
+        port: parseInt(process.env.DB_PORT ?? "3000", 10),
+      },
     });
 
     // ensures MongoMemoryServer is up

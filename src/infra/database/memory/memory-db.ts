@@ -1,5 +1,5 @@
-import { injectable } from 'inversify';
-import { v4 as uuidv4 } from 'uuid';
+import { injectable } from "inversify";
+import { v4 as uuidv4 } from "uuid";
 
 class Collection {
   private data: Record<string, unknown> = {};
@@ -7,7 +7,7 @@ class Collection {
   async findAll<T extends { id: string }>(): Promise<T[]> {
     return Object.entries(this.data).map(([key, value]) => ({
       id: key,
-      ...(value as Record<string, unknown>)
+      ...(value as Record<string, unknown>),
     })) as T[];
   }
 

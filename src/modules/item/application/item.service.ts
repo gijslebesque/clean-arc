@@ -1,7 +1,7 @@
-import { inject, injectable } from 'inversify';
-import { Item } from '../domain/entity/item.entity';
-import { ItemRepository } from '../domain/repository/item.respository';
-import { TYPES } from '../types';
+import { inject, injectable } from "inversify";
+import { Item } from "../domain/entity/item.entity";
+import { ItemRepository } from "../domain/repository/item.respository";
+import { TYPES } from "../types";
 
 @injectable()
 export class ItemService {

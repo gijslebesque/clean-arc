@@ -1,7 +1,7 @@
-import { InversifyExpressServer } from 'inversify-express-utils';
-import { injectable } from 'inversify';
-import * as bodyParser from 'body-parser';
-import { container } from '../../container';
+import { InversifyExpressServer } from "inversify-express-utils";
+import { injectable } from "inversify";
+import * as bodyParser from "body-parser";
+import { container } from "../container";
 
 // load everything needed to the Container
 
@@ -21,7 +21,7 @@ export class Server {
     server.setConfig((app) => {
       app.use(
         bodyParser.urlencoded({
-          extended: true
+          extended: true,
         })
       );
       app.use(bodyParser.json());
@@ -29,6 +29,6 @@ export class Server {
 
     const serverInstance = server.build();
     serverInstance.listen(3000);
-    console.log('listening on port 3000');
+    console.log("listening on port 3000");
   }
 }

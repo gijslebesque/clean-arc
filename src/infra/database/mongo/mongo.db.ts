@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 export class DbConnection {
   public static async connect() {
@@ -10,13 +10,13 @@ export class DbConnection {
         console.log(`Successfully connected to ${connStr}`);
       })
       .catch((error) => {
-        console.error('Error connecting to database: ', error);
+        console.error("Error connecting to database: ", error);
         return process.exit(1);
       });
   }
 
   public static setAutoReconnect() {
-    mongoose.connection.on('disconnected', () => DbConnection.connect());
+    mongoose.connection.on("disconnected", () => DbConnection.connect());
   }
 
   public static async disconnect() {

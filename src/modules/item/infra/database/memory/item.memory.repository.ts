@@ -1,8 +1,8 @@
-import { injectable, inject } from 'inversify';
-import { Item, UnmarshalledItem } from '../../../domain/entity/item.entity';
-import { ItemRepository } from '../../../domain/repository/item.respository';
-import { TYPES } from '../../../types';
-import { MemoryData } from './memory-db';
+import { injectable, inject } from "inversify";
+import { Item, UnmarshalledItem } from "../../../domain/entity/item.entity";
+import { ItemRepository } from "../../../domain/repository/item.respository";
+import { TYPES } from "../../../types";
+import { MemoryData } from "../../../../../infra/database/memory/memory-db";
 
 @injectable()
 export class ItemMemoryRepository implements ItemRepository {

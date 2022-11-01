@@ -1,4 +1,4 @@
-import { Entity } from '../../../../lib/entity';
+import { Entity } from "../../../../lib/entity";
 
 export interface UnmarshalledItem {
   id?: string;
@@ -21,7 +21,7 @@ export class Item extends Entity<UnmarshalledItem> {
     return {
       id: this.id,
       displayName: this.displayName,
-      price: parseFloat(this.price.toString())
+      price: parseFloat(this.price.toString()),
     };
   }
 
@@ -30,10 +30,10 @@ export class Item extends Entity<UnmarshalledItem> {
   }
 
   get displayName(): string {
-    return this.displayName;
+    return this.props.displayName;
   }
 
   get price(): number {
-    return this.price;
+    return this.props.price;
   }
 }
