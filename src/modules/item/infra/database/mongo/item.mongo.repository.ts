@@ -21,10 +21,14 @@ export class ItemMongoRepository implements ItemRepository {
 
   async insert(item: Item): Promise<Item> {
     const { displayName, price } = item.unmarshal();
-    const inserted = await ItemModel.create({
+    const insertedDoc = await ItemModel.create({
       displayName,
       price,
     });
-    return Item.create(inserted);
+
+    const insertedObject = insertedDoc.toObject();
+
+    //@ts-ignore need to fix this
+    return Item.create({ id: insertedObject._id, ...insertedObject });
   }
 }

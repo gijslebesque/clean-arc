@@ -2,8 +2,7 @@ import mongoose from "mongoose";
 
 export class DbConnection {
   public static async connect() {
-    const connStr = `mongodb://${process.env.DB_IP}:${process.env.DB_PORT}/${process.env.DB_DB_NAME}`;
-
+    const connStr = `mongodb://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_IP}:${process.env.DB_PORT}/${process.env.DB_NAME}`;
     return mongoose
       .connect(connStr)
       .then(() => {
