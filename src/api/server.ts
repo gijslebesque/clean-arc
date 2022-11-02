@@ -10,7 +10,7 @@ export interface IServer {
 }
 
 @injectable()
-export class Server {
+export class Server implements IServer {
   // @inject(TYPES.HTTPRouter) private _router: HTTPRouter;
   // @inject(TYPES.Logger) private _logger: Logger;
 

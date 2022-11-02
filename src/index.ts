@@ -4,10 +4,11 @@ dotenv.config();
 import { IServer } from "./api/server";
 import { container } from "./container";
 import { TYPES } from "./modules/item/types";
-import { DbConnection } from "./infra/database/mongo/mongo.db";
+import { IMongoDb } from "./infra/database/mongo/mongo.db";
 
 const start = async () => {
-  await DbConnection.connect();
+  await container.get<IMongoDb>(TYPES.MongoDb).connect();
+
   const server = container.get<IServer>(TYPES.Server);
   return server.start();
 };

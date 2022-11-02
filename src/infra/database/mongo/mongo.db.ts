@@ -1,7 +1,14 @@
+import { injectable } from "inversify";
 import mongoose from "mongoose";
 
-export class DbConnection {
-  public static async connect() {
+export interface IMongoDb {
+  connect: () => Promise<void>;
+  setAutoReconnect: () => void;
+  disconnect: () => void;
+}
+@injectable()
+export class MongoDb implements IMongoDb {
+  public async connect() {
     const connStr = `mongodb://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_IP}:${process.env.DB_PORT}/${process.env.DB_NAME}`;
     return mongoose
       .connect(connStr)
@@ -14,11 +21,11 @@ export class DbConnection {
       });
   }
 
-  public static setAutoReconnect() {
-    mongoose.connection.on("disconnected", () => DbConnection.connect());
+  public setAutoReconnect() {
+    mongoose.connection.on("disconnected", () => this.connect());
   }
 
-  public static async disconnect() {
+  public async disconnect() {
     await mongoose.connection.close();
   }
 }
