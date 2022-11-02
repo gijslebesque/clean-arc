@@ -7,6 +7,20 @@ export const pool = new Pool({
   idleTimeoutMillis: 30000,
 });
 
+interface Query<T> {
+  text: string;
+  params?: T[];
+}
+
+export const sqlQuery = async <T>({ text, params }: Query<T>) => {
+  const cl = await pool.connect();
+
+  const res = cl.query(text, params);
+
+  cl.release();
+  return res;
+};
+
 export interface IIPostgresDb {
   client: Client;
   provision: () => Promise<void>;
