@@ -16,6 +16,6 @@
     "skipLibCheck": true, /* Skip type checking all .d.ts files. */
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "types": ["reflect-metadata"]
+    "types": ["reflect-metadata", "jest"]
   }
 }
