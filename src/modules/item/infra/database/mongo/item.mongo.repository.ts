@@ -1,7 +1,7 @@
 import { injectable } from "inversify";
 import { Item, UnmarshalledItem } from "../../../domain/entity/item.entity";
 import { ItemRepository } from "../../../domain/repository/item.respository";
-import { ItemModel } from "../../model/item.model";
+import { ItemModel, ItemSchema } from "../../model/item.model";
 
 @injectable()
 export class ItemMongoRepository implements ItemRepository {
@@ -26,9 +26,8 @@ export class ItemMongoRepository implements ItemRepository {
       price,
     });
 
-    const insertedObject = insertedDoc.toObject();
+    const insertedObject: ItemSchema = insertedDoc.toObject();
 
-    //@ts-ignore need to fix this
     return Item.create({ id: insertedObject._id, ...insertedObject });
   }
 }
