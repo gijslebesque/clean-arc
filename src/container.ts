@@ -7,21 +7,21 @@ import { ItemRepository } from "./modules/item/domain/repository/item.respositor
 import { TYPES } from "./modules/item/types";
 import { IServer, Server } from "./api/server";
 import { ItemMongoRepository } from "./modules/item/infra/database/mongo/item.mongo.repository";
-import { MongoDb } from "./infra/database/mongo/mongo.db";
+import { IMongoDb, MongoDb } from "./infra/database/mongo/mongo.db";
 import { ItemPostgresRepository } from "./modules/item/infra/database/postgres/item.postgres.repository";
-import { PostgresDB } from "./infra/database/postgres/postgres";
+import { IPostgresDb, PostgresDB } from "./infra/database/postgres/postgres";
 
 const container = new Container();
 
 container.bind(TYPES.ItemController).to(ItemController).inSingletonScope();
 container.bind<IServer>(TYPES.Server).to(Server).inSingletonScope();
 
-container.bind(TYPES.ItemService).to(ItemService);
+container.bind<ItemService>(TYPES.ItemService).to(ItemService);
 
 // container.bind(TYPES.Logger).to(Logger).inSingletonScope();
-container.bind(TYPES.Database).to(MemoryData).inSingletonScope();
-container.bind(TYPES.MongoDb).to(MongoDb).inSingletonScope();
-container.bind(TYPES.PostgresDb).to(PostgresDB).inSingletonScope();
+container.bind<MemoryData>(TYPES.Database).to(MemoryData).inSingletonScope();
+container.bind<IMongoDb>(TYPES.MongoDb).to(MongoDb).inSingletonScope();
+container.bind<IPostgresDb>(TYPES.PostgresDb).to(PostgresDB).inSingletonScope();
 
 // container.bind()
 // container.bind<CartRepository>(TYPES.CartRepository).to(CartMemoryRepository);

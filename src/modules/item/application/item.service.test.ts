@@ -14,8 +14,8 @@ describe("item-service", () => {
   const container = new Container();
   container.bind(TYPES.Database).to(MemoryData).inSingletonScope();
   container.bind<ItemRepository>(TYPES.ItemRepository).to(ItemMemoryRepository);
-  container.bind(TYPES.ItemService).to(ItemService);
-  const itemService: ItemService = container.get(TYPES.ItemService);
+  container.bind<ItemService>(TYPES.ItemService).to(ItemService);
+  const itemService = container.get<ItemService>(TYPES.ItemService);
 
   test("is defined", () => {
     expect(itemService).toBeDefined();

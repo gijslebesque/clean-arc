@@ -21,12 +21,12 @@ export const sqlQuery = async <T>({ text, params }: Query<T>) => {
   return res;
 };
 
-export interface IIPostgresDb {
+export interface IPostgresDb {
   client: Client;
   provision: () => Promise<void>;
 }
 @injectable()
-export class PostgresDB implements IIPostgresDb {
+export class PostgresDB implements IPostgresDb {
   private _client() {
     return new Client({
       connectionString: process.env.POSTGRESS_DB_URL,
