@@ -9,7 +9,7 @@ import { Item } from "../domain/entity/item.entity";
 
 const testEntity = Item.create({ displayName: "hello", price: 1 });
 
-describe("item-service", () => {
+describe("item-service in memory", () => {
   // use container for necessary dependency injections
   const container = new Container();
   container.bind(TYPES.Database).to(MemoryData).inSingletonScope();

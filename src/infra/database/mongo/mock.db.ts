@@ -1,28 +1,23 @@
+import { injectable } from "inversify";
 import MongoMemoryServer from "mongodb-memory-server-core/lib/MongoMemoryServer";
-import { DbConnection } from "./mongo.db";
+import mongoose from "mongoose";
 
-export class DbMock {
+@injectable()
+export class MongoMemoryDb {
   public static mongod: MongoMemoryServer;
 
-  public static async initDbMock() {
-    DbMock.mongod = new MongoMemoryServer({
-      instance: {
-        dbName: process.env.DB_DB_NAME,
-        ip: process.env.DB_IP,
-        port: parseInt(process.env.DB_PORT ?? "3000", 10),
-      },
-    });
+  public async connect() {
+    MongoMemoryDb.mongod = await MongoMemoryServer.create();
 
     // ensures MongoMemoryServer is up
-    await DbMock.mongod.getUri();
+    const uri = await MongoMemoryDb.mongod.getUri();
 
-    await DbConnection.connect();
+    await mongoose.connect(uri);
 
-    return DbMock.mongod;
+    return MongoMemoryDb.mongod;
   }
 
   public static async stopDbMock() {
-    await DbConnection.disconnect();
-    await DbMock.mongod.stop();
+    await MongoMemoryDb.mongod.stop();
   }
 }

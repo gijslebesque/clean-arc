@@ -2,6 +2,7 @@ const TYPES = {
   // Logger: Symbol.for('Logger'),
   Database: Symbol.for("Database"),
   MongoDb: Symbol.for("MongoDb"),
+  MongoMemoryDb: Symbol.for("MongoMemoryDb"),
   PostgresDb: Symbol.for("PostgresDb"),
   Server: Symbol.for("Server"),
   ItemController: Symbol.for("ItemController"),

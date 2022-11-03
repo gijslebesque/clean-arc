@@ -1,22 +1,27 @@
 import { injectable } from "inversify";
-import { Item, UnmarshalledItem } from "../../../domain/entity/item.entity";
+import { Item } from "../../../domain/entity/item.entity";
 import { ItemRepository } from "../../../domain/repository/item.respository";
 import { ItemModel, ItemSchema } from "../../model/item.model";
+
+const mapper = (item: ItemSchema) => {
+  const insertedObject: ItemSchema = item.toObject();
+  return Item.create({ id: insertedObject._id, ...insertedObject });
+};
 
 @injectable()
 export class ItemMongoRepository implements ItemRepository {
   async findAll(): Promise<Item[]> {
     const items = await ItemModel.find();
 
-    return items.map((item) => Item.create(item));
+    return items.map(mapper);
   }
 
   async getById(id: string): Promise<Item> {
-    const item = await ItemModel.findById<UnmarshalledItem>(id);
+    const item = await ItemModel.findById(id);
     if (!item) {
       throw new Error(id);
     }
-    return Item.create(item);
+    return mapper(item);
   }
 
   async insert(item: Item): Promise<Item> {
@@ -26,8 +31,6 @@ export class ItemMongoRepository implements ItemRepository {
       price,
     });
 
-    const insertedObject: ItemSchema = insertedDoc.toObject();
-
-    return Item.create({ id: insertedObject._id, ...insertedObject });
+    return mapper(insertedDoc);
   }
 }

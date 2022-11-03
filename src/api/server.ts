@@ -1,7 +1,7 @@
 import { InversifyExpressServer } from "inversify-express-utils";
 import { injectable } from "inversify";
 import * as bodyParser from "body-parser";
-import { container } from "../container";
+import { container } from "../di-container/container";
 
 // load everything needed to the Container
 
