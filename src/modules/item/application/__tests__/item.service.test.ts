@@ -1,11 +1,12 @@
 import "reflect-metadata";
 import { Container } from "inversify";
-import { ItemRepository } from "../domain/repository/item.respository";
-import { ItemMemoryRepository } from "../infra/database/memory/item.memory.repository";
-import { TYPES } from "../types";
-import { ItemService } from "./item.service";
-import { MemoryData } from "../../../infra/database/memory/memory-db";
-import { Item } from "../domain/entity/item.entity";
+import { ItemRepository } from "../../domain/repository/item.respository";
+import { ItemMemoryRepository } from "../../infra/database/memory/item.memory.repository";
+import { TYPES } from "../../types";
+import { ItemService } from "../item.service";
+import { MemoryData } from "../../../../infra/database/memory/memory-db";
+import { Item } from "../../domain/entity/item.entity";
+import { ItemSchema } from "../../infra/model/item.model";
 
 const testEntity = Item.create({ displayName: "hello", price: 1 });
 
@@ -17,6 +18,8 @@ describe("item-service in memory", () => {
   container.bind<ItemService>(TYPES.ItemService).to(ItemService);
   const itemService = container.get<ItemService>(TYPES.ItemService);
 
+  let created: Item;
+
   test("is defined", () => {
     expect(itemService).toBeDefined();
   });
@@ -25,10 +28,10 @@ describe("item-service in memory", () => {
     // Arrange
 
     // Act
-    const newItem = await itemService.create(testEntity);
+    created = await itemService.create(testEntity);
 
     // Assert
-    expect(testEntity).toEqual(newItem);
+    expect(testEntity).toEqual(created);
   });
 
   test("finds a items", async () => {
@@ -37,16 +40,16 @@ describe("item-service in memory", () => {
     const res = await itemService.findAll();
 
     // Assert
-    expect(res).toEqual([testEntity]);
+    expect(res).toHaveLength(1);
   });
 
   test("finds an item by id", async () => {
     // Act
 
-    const res = await itemService.getById(testEntity.id);
+    const res = await itemService.getById(created.id);
 
     // Assert
-    expect(res).toEqual(testEntity);
+    expect(res).toEqual(created);
   });
 
   test("throws error if item doesn't exist", async () => {

@@ -17,7 +17,9 @@ export class MongoMemoryDb {
     return MongoMemoryDb.mongod;
   }
 
-  public static async stopDbMock() {
+  public async stopDbMock() {
+    await mongoose.disconnect();
+
     await MongoMemoryDb.mongod.stop();
   }
 }
